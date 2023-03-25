@@ -29,7 +29,6 @@ namespace Encrypted_Notepad
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.dlg_saveFile = new System.Windows.Forms.SaveFileDialog();
             this.dlg_openFile = new System.Windows.Forms.OpenFileDialog();
@@ -53,7 +52,6 @@ namespace Encrypted_Notepad
             this.mnu_Help = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.ctx_mnu_Strip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mainTextBox = new Encrypted_Notepad.EncryptedTextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btn_newFileToolstrip = new System.Windows.Forms.ToolStripButton();
@@ -74,6 +72,10 @@ namespace Encrypted_Notepad
             this.dlg_saveFile.DefaultExt = "enc";
             this.dlg_saveFile.Filter = "EncryptedTextFiles|*.enc";
             this.dlg_saveFile.FileOk += new System.ComponentModel.CancelEventHandler(this.dlg_saveFile_FileOk);
+            // 
+            // dlg_openFile
+            // 
+            this.dlg_openFile.FileOk += new System.ComponentModel.CancelEventHandler(this.dlg_openFile_FileOk);
             // 
             // mnu_File_Strip
             // 
@@ -110,6 +112,7 @@ namespace Encrypted_Notepad
             this.mnuDecryptAndOpen.Name = "mnuDecryptAndOpen";
             this.mnuDecryptAndOpen.Size = new System.Drawing.Size(180, 22);
             this.mnuDecryptAndOpen.Text = "Decrypt and &Open...";
+            this.mnuDecryptAndOpen.Click += new System.EventHandler(this.mnuDecryptAndOpen_Click);
             // 
             // mnuSaveAndEncrypt
             // 
@@ -230,24 +233,18 @@ namespace Encrypted_Notepad
             this.mnuAbout.Size = new System.Drawing.Size(107, 22);
             this.mnuAbout.Text = "&About";
             // 
-            // ctx_mnu_Strip
-            // 
-            this.ctx_mnu_Strip.Name = "contextMenuStrip1";
-            this.ctx_mnu_Strip.Size = new System.Drawing.Size(61, 4);
-            // 
             // mainTextBox
             // 
             this.mainTextBox.AcceptsReturn = true;
             this.mainTextBox.AcceptsTab = true;
-            this.mainTextBox.ContextMenuStrip = this.ctx_mnu_Strip;
             this.mainTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mainTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.mainTextBox.Location = new System.Drawing.Point(0, 24);
+            this.mainTextBox.Location = new System.Drawing.Point(0, 52);
             this.mainTextBox.MaxLength = 64767;
             this.mainTextBox.Multiline = true;
             this.mainTextBox.Name = "mainTextBox";
             this.mainTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.mainTextBox.Size = new System.Drawing.Size(690, 588);
+            this.mainTextBox.Size = new System.Drawing.Size(690, 560);
             this.mainTextBox.TabIndex = 2;
             this.mainTextBox.TextChanged += new System.EventHandler(this.mainTextBox_TextChanged);
             // 
@@ -278,6 +275,7 @@ namespace Encrypted_Notepad
             this.btn_newFileToolstrip.Size = new System.Drawing.Size(23, 22);
             this.btn_newFileToolstrip.Text = "&New";
             this.btn_newFileToolstrip.ToolTipText = "Create new Encrypted Text File";
+            this.btn_newFileToolstrip.Click += new System.EventHandler(this.btn_newFileToolstrip_Click);
             // 
             // btn_openFileToolStrip
             // 
@@ -288,6 +286,7 @@ namespace Encrypted_Notepad
             this.btn_openFileToolStrip.Size = new System.Drawing.Size(23, 22);
             this.btn_openFileToolStrip.Text = "&Open";
             this.btn_openFileToolStrip.ToolTipText = "Open an encrypted text file";
+            this.btn_openFileToolStrip.Click += new System.EventHandler(this.btn_openFileToolStrip_Click);
             // 
             // saveToolStripButton
             // 
@@ -372,7 +371,6 @@ namespace Encrypted_Notepad
         private System.Windows.Forms.OpenFileDialog dlg_openFile;
         private System.Windows.Forms.MenuStrip mnu_File_Strip;
         private Encrypted_Notepad.EncryptedTextBox mainTextBox;
-        private System.Windows.Forms.ContextMenuStrip ctx_mnu_Strip;
         private System.Windows.Forms.ToolStripMenuItem mnu_File;
         private System.Windows.Forms.ToolStripMenuItem mnuNewFile;
         private System.Windows.Forms.ToolStripMenuItem mnuDecryptAndOpen;

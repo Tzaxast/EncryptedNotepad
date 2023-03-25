@@ -53,11 +53,6 @@ namespace Encrypted_Notepad
             }
         }
 
-        private void txt_enc_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Clipboard.GetDataObject().GetDataPresent(DataFormats.Text) == true)
@@ -78,6 +73,27 @@ namespace Encrypted_Notepad
         {
             if (e.Cancel == true ) { return; }
             DataEncryption.SaveEncryptedTextToFile(dlg_saveFile.OpenFile(),DataEncryption.EncryptText(SavedText));
+        }
+
+        private void btn_newFileToolstrip_Click(object sender, EventArgs e)
+        {
+            mainTextBox.ResetText();
+        }
+
+        private void mnuDecryptAndOpen_Click(object sender, EventArgs e)
+        {
+            dlg_openFile.ShowDialog();
+        }
+
+        private void btn_openFileToolStrip_Click(object sender, EventArgs e)
+        {
+            dlg_openFile.ShowDialog();
+        }
+
+        private void dlg_openFile_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if(e.Cancel == true ) { return; }
+            DataEncryption.OpenDecryptedTextFile(dlg_openFile.OpenFile());
         }
     }
 }

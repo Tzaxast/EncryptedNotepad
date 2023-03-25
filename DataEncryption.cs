@@ -127,12 +127,22 @@ namespace Crypto
             return output;
         }
 
-        public static void SaveEncryptedTextToFile(Stream fileStream, string Encryptedtext)
+        internal static void SaveEncryptedTextToFile(Stream file, string Encryptedtext)
         {
-            using (StreamWriter writer = new StreamWriter(fileStream))
+            using (StreamWriter writer = new StreamWriter(file))
             { 
                 writer.Write(Encryptedtext);
             }
+        }
+
+        internal static void OpenDecryptedTextFile(Stream file)
+        {
+            string text_to_decrypt;
+            using (StreamReader txtreader = new StreamReader(file))
+            {
+                text_to_decrypt = txtreader.ReadToEnd();
+            }
+            DecryptText(text_to_decrypt);
         }
     }
 }
